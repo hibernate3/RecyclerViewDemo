@@ -54,7 +54,15 @@ public class NormalRecyclerViewAdapter extends
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("NormalTextViewHolder", "onClick--> position = " + getPosition());
+                    Log.d("myLog", "onClick--> position = " + getPosition());
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener(){
+                @Override
+                public boolean onLongClick(View v) {
+                    Log.d("myLog", "onLongClick--> position = " + getPosition());
+                    return true;
                 }
             });
         }

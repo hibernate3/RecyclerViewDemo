@@ -47,6 +47,7 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof TextViewHolder) {
             ((TextViewHolder) holder).mTextView.setText(mTitles[position]);
         } else if (holder instanceof ImageViewHolder) {
+            ((ImageViewHolder) holder).mImageView.setImageResource(R.drawable.test);
             ((ImageViewHolder) holder).mTextView.setText(mTitles[position]);
         }
     }
@@ -72,7 +73,16 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("TextViewHolder", "onClick--> position = " + getPosition());
+                    Log.d("myLog", "onClick--> position = " + getPosition());
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener(){
+
+                @Override
+                public boolean onLongClick(View v) {
+                    Log.d("myLog", "onLongClick--> position = " + getPosition());
+                    return true;
                 }
             });
         }
@@ -91,7 +101,15 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("ImageViewHolder", "onClick--> position = " + getPosition());
+                    Log.d("myLog", "onClick--> position = " + getPosition());
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener(){
+                @Override
+                public boolean onLongClick(View v) {
+                    Log.d("myLog", "onLongClick--> position = " + getPosition());
+                    return true;
                 }
             });
         }
