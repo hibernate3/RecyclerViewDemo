@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -25,10 +29,12 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
-    private String[] mTitles;
+    private List<String> mTitles;
 
     public MultipleItemAdapter(Context context) {
-        mTitles = context.getResources().getStringArray(R.array.titles);
+//        mTitles = context.getResources().getStringArray(R.array.titles);
+        mTitles = new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.titles)));
+
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
     }
@@ -45,10 +51,10 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof TextViewHolder) {
-            ((TextViewHolder) holder).mTextView.setText(mTitles[position]);
+            ((TextViewHolder) holder).mTextView.setText(mTitles.get(position));
         } else if (holder instanceof ImageViewHolder) {
             ((ImageViewHolder) holder).mImageView.setImageResource(R.drawable.test);
-            ((ImageViewHolder) holder).mTextView.setText(mTitles[position]);
+            ((ImageViewHolder) holder).mTextView.setText(mTitles.get(position));
         }
     }
 
@@ -59,7 +65,7 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return mTitles == null ? 0 : mTitles.length;
+        return mTitles == null ? 0 : mTitles.size();
     }
 
     public static class TextViewHolder extends RecyclerView.ViewHolder {
@@ -113,5 +119,15 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
             });
         }
+    }
+
+    public void addData(int position) {
+        mTitles.add(position, "Insert One");
+        notifyItemInserted(position);
+    }
+
+    public void removeData(int position) {
+        mTitles.remove(position);
+        notifyItemRemoved(position);
     }
 }
