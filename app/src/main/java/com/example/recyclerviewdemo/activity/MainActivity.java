@@ -1,15 +1,18 @@
-package com.example.recyclerviewdemo;
+package com.example.recyclerviewdemo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.ScrollerCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.recyclerviewdemo.R;
+import com.example.recyclerviewdemo.adapter.MultipleItemAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-//        startActivity(new Intent(MainActivity.this, RefreshActivity.class));
+        startActivity(new Intent(MainActivity.this, ScrollingActivity.class));
 
         initView();
     }
