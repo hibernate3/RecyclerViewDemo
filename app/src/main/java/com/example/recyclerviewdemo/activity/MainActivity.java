@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        startActivity(new Intent(MainActivity.this, ScrollingActivity.class));
+//        startActivity(new Intent(MainActivity.this, ScrollingActivity.class));
 
         initView();
     }
