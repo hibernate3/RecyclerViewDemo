@@ -2,9 +2,11 @@ package com.example.recyclerviewdemo.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.example.recyclerviewdemo.R;
 import com.example.recyclerviewdemo.utils.ItemTouchHelperAdapter;
 import com.example.recyclerviewdemo.utils.ItemTouchHelperViewHolder;
+import com.example.recyclerviewdemo.utils.OnStartDragListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,17 +28,21 @@ import butterknife.ButterKnife;
  * Created by wangyuhang@evergrande.cn on 2018-1-8.
  */
 
-public class DragListRecyclerViewAdapter extends
+public class DragGridRecyclerViewAdapter extends
         RecyclerView.Adapter<NormalRecyclerViewAdapter.NormalTextViewHolder> implements ItemTouchHelperAdapter {
 
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
     private List<String> mTitles;
 
-    public DragListRecyclerViewAdapter(Context context) {
+    private final OnStartDragListener mDragStartListener;
+
+    public DragGridRecyclerViewAdapter(Context context, OnStartDragListener dragStartListener) {
         mTitles = new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.titles)));
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
+
+        mDragStartListener = dragStartListener;
     }
 
     @Override
@@ -44,8 +51,18 @@ public class DragListRecyclerViewAdapter extends
     }
 
     @Override
-    public void onBindViewHolder(NormalRecyclerViewAdapter.NormalTextViewHolder holder, int position) {
+    public void onBindViewHolder(final NormalRecyclerViewAdapter.NormalTextViewHolder holder, int position) {
         holder.mTextView.setText(mTitles.get(position));
+
+        holder.mTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                    mDragStartListener.onStartDrag(holder);
+                }
+                return false;
+            }
+        });
     }
 
     @Override

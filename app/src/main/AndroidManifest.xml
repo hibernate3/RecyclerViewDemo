@@ -19,7 +19,8 @@
             android:name=".activity.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.DragListActivity"></activity>
+        <activity android:name=".activity.DragListActivity" />
+        <activity android:name=".activity.DragGridActivity"></activity>
     </application>
 
 </manifest>
