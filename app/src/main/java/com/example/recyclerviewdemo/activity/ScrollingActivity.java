@@ -22,7 +22,7 @@ public class ScrollingActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    @BindView(R.id.recycler_view)
+    @BindView(R.id.recycler_view_2)
     RecyclerView recyclerView;
 
     private RecyclerView.Adapter mAdapter;

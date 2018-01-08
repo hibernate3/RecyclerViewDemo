@@ -14,6 +14,7 @@ import com.example.recyclerviewdemo.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,7 +36,6 @@ public class MultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private List<String> mTitles;
 
     public MultipleItemAdapter(Context context) {
-//        mTitles = context.getResources().getStringArray(R.array.titles);
         mTitles = new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.titles)));
 
         mContext = context;

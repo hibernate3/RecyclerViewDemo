@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.recyclerviewdemo.R;
+import com.example.recyclerviewdemo.utils.ItemTouchHelperAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,29 +20,29 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by wangyuhang on 2017/1/4.
+ * Created by wangyuhang@evergrande.cn on 2018-1-8.
  */
 
-public class NormalRecyclerViewAdapter extends
-        RecyclerView.Adapter<NormalRecyclerViewAdapter.NormalTextViewHolder> {
+public class DragListRecyclerViewAdapter extends
+        RecyclerView.Adapter<NormalRecyclerViewAdapter.NormalTextViewHolder> implements ItemTouchHelperAdapter {
 
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
     private List<String> mTitles;
 
-    public NormalRecyclerViewAdapter(Context context) {
+    public DragListRecyclerViewAdapter(Context context) {
         mTitles = new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.titles)));
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
     @Override
-    public NormalTextViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NormalTextViewHolder(mLayoutInflater.inflate(R.layout.item_text, parent, false));
+    public NormalRecyclerViewAdapter.NormalTextViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new NormalRecyclerViewAdapter.NormalTextViewHolder(mLayoutInflater.inflate(R.layout.item_text, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(NormalTextViewHolder holder, int position) {
+    public void onBindViewHolder(NormalRecyclerViewAdapter.NormalTextViewHolder holder, int position) {
         holder.mTextView.setText(mTitles.get(position));
     }
 
@@ -73,5 +74,17 @@ public class NormalRecyclerViewAdapter extends
                 }
             });
         }
+    }
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(mTitles, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        mTitles.remove(position);
+        notifyItemRemoved(position);
     }
 }

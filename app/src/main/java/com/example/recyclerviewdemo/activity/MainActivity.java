@@ -2,7 +2,6 @@ package com.example.recyclerviewdemo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.ScrollerCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,13 +12,14 @@ import android.widget.Button;
 
 import com.example.recyclerviewdemo.R;
 import com.example.recyclerviewdemo.adapter.MultipleItemAdapter;
+import com.example.recyclerviewdemo.adapter.NormalRecyclerViewAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.recycler_view)
+    @BindView(R.id.recycler_view_1)
     RecyclerView mRecyclerView;
     @BindView(R.id.addBtn)
     Button addBtn;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-//        startActivity(new Intent(MainActivity.this, ScrollingActivity.class));
+        startActivity(new Intent(MainActivity.this, DragListActivity.class));
 
         initView();
     }
@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));//这里用线性宫格显示 类似于grid view
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));// 这里用线性宫格显示 类似于瀑布流
 
-//        mRecyclerView.setAdapter(new NormalRecyclerViewAdapter(this));
-        mRecyclerView.setAdapter(mAdapter = new MultipleItemAdapter(this));
+        mRecyclerView.setAdapter(mAdapter = new NormalRecyclerViewAdapter(this));
+//        mRecyclerView.setAdapter(mAdapter = new MultipleItemAdapter(this));
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//动画效果，更多效果使用参考：https://github.com/gabrielemariotti/RecyclerViewItemAnimators
 
