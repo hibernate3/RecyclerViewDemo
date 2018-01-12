@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        startActivity(new Intent(MainActivity.this, DragListActivity.class));
+//        startActivity(new Intent(MainActivity.this, DragListActivity.class));
+        startActivity(new Intent(MainActivity.this, DragGridActivity.class));
 
         initView();
     }
@@ -46,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));//这里用线性宫格显示 类似于grid view
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));// 这里用线性宫格显示 类似于瀑布流
 
-        mRecyclerView.setAdapter(mAdapter = new NormalRecyclerViewAdapter(this));
-//        mRecyclerView.setAdapter(mAdapter = new MultipleItemAdapter(this));
+//        mRecyclerView.setAdapter(mAdapter = new NormalRecyclerViewAdapter(this));
+        mRecyclerView.setAdapter(mAdapter = new MultipleItemAdapter(this));
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//动画效果，更多效果使用参考：https://github.com/gabrielemariotti/RecyclerViewItemAnimators
 
-        swipeLayout.setDistanceToTriggerSync(666);//设定手指下滑距离出发刷新
+        swipeLayout.setDistanceToTriggerSync(666);//设定手指下滑距离触发刷新
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

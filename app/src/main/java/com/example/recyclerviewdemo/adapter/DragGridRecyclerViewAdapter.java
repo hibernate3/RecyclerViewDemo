@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  */
 
 public class DragGridRecyclerViewAdapter extends
-        RecyclerView.Adapter<NormalRecyclerViewAdapter.NormalTextViewHolder> implements ItemTouchHelperAdapter {
+        RecyclerView.Adapter<DragGridRecyclerViewAdapter.NormalTextViewHolder> implements ItemTouchHelperAdapter {
 
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
@@ -46,12 +46,12 @@ public class DragGridRecyclerViewAdapter extends
     }
 
     @Override
-    public NormalRecyclerViewAdapter.NormalTextViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NormalRecyclerViewAdapter.NormalTextViewHolder(mLayoutInflater.inflate(R.layout.item_text, parent, false));
+    public DragGridRecyclerViewAdapter.NormalTextViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new DragGridRecyclerViewAdapter.NormalTextViewHolder(mLayoutInflater.inflate(R.layout.item_text, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final NormalRecyclerViewAdapter.NormalTextViewHolder holder, int position) {
+    public void onBindViewHolder(final DragGridRecyclerViewAdapter.NormalTextViewHolder holder, int position) {
         holder.mTextView.setText(mTitles.get(position));
 
         holder.mTextView.setOnTouchListener(new View.OnTouchListener() {
